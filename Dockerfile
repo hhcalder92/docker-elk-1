@@ -1,7 +1,7 @@
 ###### LEK (Logstash/Elasticsearch/Kibana3)
 # A docker image that includes
 # - logstash (1.4)
-# - elasticsearch (1.0)
+# - elasticsearch (1.4)
 # - kibana (3.0)
 # - StatsD (to fetch stuff from logstash)
 FROM qnib/terminal
