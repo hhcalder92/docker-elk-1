@@ -6,7 +6,7 @@
 # - StatsD (to fetch stuff from logstash)
 FROM qnib/terminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
-
+RUN echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/
 ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
