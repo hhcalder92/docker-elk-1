@@ -60,7 +60,7 @@ ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHand
 ADD etc/supervisord.d/ /etc/supervisord.d/
 
 
-RUN /opt/kibana-4.0.0-linux-x64/bin/kibana
+RUN /opt/kibana-4.0.0-linux-x64/bin/kibana > kibana.log 2>&1 &
 RUN /usr/share/elasticsearch/bin/plugin --install lmenezes/elasticsearch-kopf/master
 
 # move up
