@@ -19,9 +19,10 @@ ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/
 
 # elasticsearch
 RUN yum install -y elasticsearch && \
-    sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elasticsearch.yml
+    sed -i '/# cluster.name:.*/a cluster.name: elasticsearch' /etc/elasticsearch/elasticsearch.yml
 ## Makes no sense to be done while building
 #RUN sed -i "/# node.name:.*/a node.name: $(hostname)" /etc/elasticsearch/elasticsearch.yml
+
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 # diamond collector
 ADD etc/diamond/collectors/ElasticSearchCollector.conf /etc/diamond/collectors/ElasticSearchCollector.conf 
@@ -58,6 +59,8 @@ ADD etc/syslog-ng/conf.d/logstash.conf /etc/syslog-ng/conf.d/logstash.conf
 ADD opt/qnib/bin/ /opt/qnib/bin/
 ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
 ADD etc/supervisord.d/ /etc/supervisord.d/
+
+RUN /usr/share/elasticsearch/bin/plugin --install lmenezes/elasticsearch-kopf/master
 
 # move up
 RUN rm -f /root/bin/* && \
