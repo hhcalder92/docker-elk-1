@@ -37,16 +37,16 @@ RUN echo "20140917.1"; yum clean all; yum install -y qnib-statsd qnib-grok-patte
 
 ## Kibana
 WORKDIR /opt/
-ADD kibana-3.1.1.tar.gz /opt/
+ADD kibana-4.0.0-linux-x64.tar /opt/
 WORKDIR /etc/nginx/conf.d
-ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
-WORKDIR /etc/nginx/
-RUN mkdir -p /var/www; ln -s /opt/kibana-3.1.1 /var/www/kibana && \
-    if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
+#ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
+#WORKDIR /etc/nginx/
+#RUN mkdir -p /var/www; ln -s /opt/kibana-3.1.1 /var/www/kibana && \
+#    if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 
 # Config kibana-Dashboards
-ADD var/www/kibana/app/dashboards/ /var/www/kibana/app/dashboards/
-ADD var/www/kibana/config.js /var/www/kibana/config.js
+#ADD var/www/kibana/app/dashboards/ /var/www/kibana/app/dashboards/
+#ADD var/www/kibana/config.js /var/www/kibana/config.js
 
 # logstash watchdog
 ADD root/bin/ /root/bin/
@@ -59,6 +59,8 @@ ADD opt/qnib/bin/ /opt/qnib/bin/
 ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
 ADD etc/supervisord.d/ /etc/supervisord.d/
 
+
+RUN /opt/kibana-4.0.0-linux-x64/bin/kibana
 RUN /usr/share/elasticsearch/bin/plugin --install lmenezes/elasticsearch-kopf/master
 
 # move up
