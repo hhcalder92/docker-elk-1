@@ -59,6 +59,8 @@ ADD opt/qnib/bin/ /opt/qnib/bin/
 ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
 ADD etc/supervisord.d/ /etc/supervisord.d/
 
+RUN /usr/share/elasticsearch/bin/plugin --install lmenezes/elasticsearch-kopf/master
+
 # move up
 RUN rm -f /root/bin/* && \
     ln -s /opt/qnib/bin/* /root/bin/
