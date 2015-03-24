@@ -1,0 +1,7 @@
+[local_logstash-1.5]
+name=Local logstash repository for 1.5.x packages
+baseurl=http://172.17.42.1:81/repo/logstash/1.5
+skip_if_unavailable=true
+priority=1
+gpgcheck=0
+enabled=1
