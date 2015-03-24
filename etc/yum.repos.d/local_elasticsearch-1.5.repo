@@ -1,0 +1,7 @@
+[local_elasticsearch-1.5]
+name=Local elasticsearch repository for 1.5.x packages
+baseurl=http://172.17.42.1:81/repo/elasticsearch/1.5
+skip_if_unavailable=true
+priority=1
+gpgcheck=0
+enabled=1
