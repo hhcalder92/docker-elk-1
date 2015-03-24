@@ -7,8 +7,8 @@
 FROM qnib/terminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 RUN echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/
-ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
+ADD etc/yum.repos.d/logstash-*.repo /etc/yum.repos.d/
+ADD etc/yum.repos.d/elasticsearch-*.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
     ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
 
@@ -26,10 +26,6 @@ ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 # diamond collector
 ADD etc/diamond/collectors/ElasticSearchCollector.conf /etc/diamond/collectors/ElasticSearchCollector.conf 
 
-## nginx
-RUN yum install -y nginx httpd-tools
-ADD etc/nginx/ /etc/nginx/
-ADD etc/diamond/collectors/NginxCollector.conf /etc/diamond/collectors/NginxCollector.conf
 
 # Add QNIBInc repo
 # statsd
@@ -37,7 +33,7 @@ RUN echo "20140917.1"; yum clean all; yum install -y qnib-statsd qnib-grok-patte
 
 ## Kibana
 WORKDIR /opt/
-ADD kibana-4.0.0-linux-x64.tar /opt/
+ADD kibana-*.tar /opt/
 WORKDIR /etc/nginx/conf.d
 #ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
 #WORKDIR /etc/nginx/
@@ -65,4 +61,4 @@ RUN /usr/share/elasticsearch/bin/plugin --install lmenezes/elasticsearch-kopf/ma
 # move up
 RUN rm -f /root/bin/* && \
     ln -s /opt/qnib/bin/* /root/bin/
-RUN /opt/kibana-4.0.0-linux-x64/bin/kibana > kibana.log 2>&1 &
+RUN /opt/kibana-*/bin/kibana > kibana.log 2>&1 &
